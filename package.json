@@ -26,5 +26,14 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "standard-version": "^8.0.2"
+  },
+  "dependencies": {
+    "dgraph-js": "^20.3.0",
+    "grpc": "^1.24.3",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^9.1.0"
   }
 }
