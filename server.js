@@ -1,18 +1,11 @@
 const bodyParser = require('koa-bodyparser')
 const koaLogger = require('koa-logger')
 const koaBody = require('koa-body')
-const Router = require('koa-router')
 
 const initializeApp = require('./lib/initializeApp')
+const router = require('./router')
 
 const app = initializeApp()
-
-const router = new Router()
-
-router
-  .get('/', async (ctx) => {
-    ctx.body = 'Hello World'
-  })
 
 app
   .use(koaLogger())
