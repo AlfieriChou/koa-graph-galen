@@ -1,24 +1,18 @@
-const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const koaLogger = require('koa-logger')
 const koaBody = require('koa-body')
 const Router = require('koa-router')
-const dgraph = require('dgraph-js')
-const grpc = require('grpc')
 
-const app = new Koa()
+const initializeApp = require('./lib/initializeApp')
+
+const app = initializeApp()
+
 const router = new Router()
-const clientStub = new dgraph.DgraphClientStub(
-  'localhost:9080',
-  grpc.credentials.createInsecure()
-)
 
 router
-  .get('/', (ctx) => {
+  .get('/', async (ctx) => {
     ctx.body = 'Hello World'
   })
-
-app.context.dgraph = new dgraph.DgraphClient(clientStub)
 
 app
   .use(koaLogger())
