@@ -7,11 +7,11 @@ router
     ctx.body = 'Hello World'
   })
   .post('/users', async (ctx) => {
-    const { name, age } = ctx.request.body
+    const { name, age, friends } = ctx.request.body
     const txn = ctx.dgraphClinet.newTxn()
     try {
       const queryRes = await txn.query(`{
-        users(func: eq(test_name, ${name})) { uid }
+        users(func: eq(name, ${name})) { uid }
       }`)
       const { users } = queryRes.getJson()
       if (users.length > 0) {
@@ -20,9 +20,9 @@ router
       const mu = new ctx.dgraph.Mutation()
       mu.setSetJson({
         uid: `_:${name}`,
-        test_name: name,
-        test_age: age,
-        test_friend: []
+        name,
+        age,
+        friend: friends || []
       })
       const res = await txn.mutate(mu)
       await txn.commit()
